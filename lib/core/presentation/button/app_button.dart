@@ -6,11 +6,17 @@ class AppButton extends StatefulWidget {
     required this.label,
     this.icon,
     required this.onTap,
+    this.backgroundColor,
+    this.textStyle,
+    this.iconColor,
   });
 
   final String label;
   final IconData? icon;
   final VoidCallback onTap;
+  final Color? backgroundColor;
+  final TextStyle? textStyle;
+  final Color? iconColor;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -46,7 +52,7 @@ class _AppButtonState extends State<AppButton> {
           ),
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: theme.colorScheme.primary,
+              color: widget.backgroundColor ?? theme.colorScheme.primary,
               borderRadius: const BorderRadius.all(
                 Radius.circular(4),
               ),
@@ -57,10 +63,11 @@ class _AppButtonState extends State<AppButton> {
                 vertical: 12,
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     widget.label,
-                    style: theme.textTheme.displayMedium,
+                    style: widget.textStyle ?? theme.textTheme.displayMedium,
                   ),
                   if (widget.icon != null) ...[
                     const SizedBox(
@@ -68,8 +75,8 @@ class _AppButtonState extends State<AppButton> {
                     ),
                     Icon(
                       widget.icon,
-                      size: 14,
-                      color: theme.colorScheme.surface,
+                      size: 18,
+                      color: widget.iconColor ?? theme.colorScheme.surface,
                     )
                   ]
                 ],

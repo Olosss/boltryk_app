@@ -10,7 +10,7 @@ class AppTheme {
         brightness: Brightness.light,
         primary: AppColors.primaryBlue,
         onPrimary: AppColors.primaryBlue,
-        secondary: AppColors.primaryBlue,
+        secondary: AppColors.primaryBlack,
         onSecondary: AppColors.primaryBlue,
         error: AppColors.primaryBlue,
         onError: AppColors.primaryBlue,
@@ -18,11 +18,13 @@ class AppTheme {
         onSurface: AppColors.primaryBlue,
       ),
       scaffoldBackgroundColor: AppColors.white,
-      dividerColor: AppColors.lightGrey,
+      dividerColor: AppColors.grey,
       textTheme: TextTheme(
+        displaySmall: AppTextStyles.displaySmall,
         displayLarge: AppTextStyles.headline1,
         displayMedium: AppTextStyles.displayMedium,
         titleMedium: AppTextStyles.titleMedium,
+        labelSmall: AppTextStyles.labelSmall,
       ),
     );
   }

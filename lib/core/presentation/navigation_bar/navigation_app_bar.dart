@@ -1,33 +1,31 @@
 import 'package:boltryk_app/core/presentation/button/app_button.dart';
+import 'package:boltryk_app/core/presentation/button/app_icon_button.dart';
 import 'package:boltryk_app/core/presentation/button/app_text_button.dart';
 import 'package:boltryk_app/core/presentation/divider/app_divider.dart';
 import 'package:boltryk_app/core/responsive/responsive_breakpoints.dart';
 import 'package:boltryk_app/core/responsive/responsive_data_provider.dart';
-import 'package:boltryk_app/core/router/routes.dart';
-import 'package:boltryk_app/core/router/routes_data.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class NavigationAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const NavigationAppBar({super.key});
+  const NavigationAppBar({
+    super.key,
+    required this.onAboutTap,
+    required this.onContactTap,
+  });
+
+  final VoidCallback onAboutTap;
+  final VoidCallback onContactTap;
 
   @override
   Size get preferredSize => const Size.fromHeight(94);
 
-  void _onAboutTap({
+  void _onOpenDrawerTap({
     required BuildContext context,
   }) {
-    context.push(
-      const DashboardRoute().location,
-    );
-  }
-
-  void _onContactTap({
-    required BuildContext context,
-  }) {
-    context.push(
-      const ContactRoute().location,
-    );
+    if(Scaffold.of(context).isEndDrawerOpen){
+      return;
+    }
+    Scaffold.of(context).openEndDrawer();
   }
 
   @override
@@ -53,19 +51,29 @@ class NavigationAppBar extends StatelessWidget implements PreferredSizeWidget {
                   height: 44,
                 ),
                 const Spacer(),
-                AppTextButton(
-                  label: 'About',
-                  onTap: () => _onAboutTap(context: context),
-                ),
-                AppTextButton(
-                  label: 'Foodie',
-                  onTap: () {},
-                ),
-                AppButton(
-                  label: 'Contact',
-                  icon: Icons.contact_mail,
-                  onTap: () => _onContactTap(context: context),
-                ),
+                responsiveData.isMobile
+                    ? AppIconButton(
+                        icon: Icons.menu,
+                        onTap: () => _onOpenDrawerTap(context: context),
+                      )
+                    : Row(
+                        spacing: 64,
+                        children: [
+                          AppTextButton(
+                            label: 'About',
+                            onTap: onAboutTap,
+                          ),
+                          AppTextButton(
+                            label: 'Foodie',
+                            onTap: () {},
+                          ),
+                          AppButton(
+                            label: 'Contact',
+                            icon: Icons.person,
+                            onTap: onContactTap,
+                          ),
+                        ],
+                      ),
               ],
             ),
           ),

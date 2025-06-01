@@ -19,10 +19,24 @@ class AppTextStyles {
     color: AppColors.primaryBlack,
   );
 
+  static TextStyle displaySmall = GoogleFonts.getFont(
+    _mainFont,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.white,
+  );
+
   static TextStyle displayMedium = GoogleFonts.getFont(
     _mainFont,
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
     color: AppColors.white,
+  );
+
+  static TextStyle labelSmall = GoogleFonts.getFont(
+    _mainFont,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.lightGrey,
   );
 }

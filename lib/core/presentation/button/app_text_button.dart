@@ -5,10 +5,14 @@ class AppTextButton extends StatefulWidget {
     super.key,
     required this.label,
     required this.onTap,
+    this.style,
+    this.underlineColor,
   });
 
   final String label;
   final VoidCallback onTap;
+  final TextStyle? style;
+  final Color? underlineColor;
 
   @override
   State<AppTextButton> createState() => _AppTextButtonState();
@@ -38,14 +42,14 @@ class _AppTextButtonState extends State<AppTextButton> {
             border: _isHovered
                 ? Border(
                     bottom: BorderSide(
-                    color: theme.primaryColor,
+                    color: widget.underlineColor ?? theme.primaryColor,
                     width: 1.5,
                   ))
                 : null,
           ),
           child: Text(
             widget.label,
-            style: theme.textTheme.titleMedium,
+            style: widget.style ?? theme.textTheme.titleMedium,
           ),
         ),
       ),
